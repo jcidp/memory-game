@@ -1,6 +1,6 @@
 import "../styles/GameScreen.scss";
 import Card from "./Card";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function GameScreen() {
     const [cardNumber, setCardNumber] = useState(8);
