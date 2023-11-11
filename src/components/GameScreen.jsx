@@ -29,12 +29,12 @@ function GameScreen() {
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
-    }
+    };
 
     const endGame = () => {
         setIsGameOver(true);
         // TODO: Set High Score in Local Storage
-    }
+    };
 
     const handleCardClick = e => {
         const clickedId = +e.target.closest(".card").id;
@@ -48,7 +48,14 @@ function GameScreen() {
             if (pkmId.id === clickedId) return {...pkmId, clicked: true};
             return pkmId;
         }));
-    }
+    };
+
+    const resetGame = () => {
+        setCardNumber(8);
+        setIdList([]);
+        setScore(0)
+        setIsGameOver(false);
+    };
 
     if (cardNumber !== idList.length) createIdList();
 
@@ -57,7 +64,13 @@ function GameScreen() {
     return (<main>
         <p>{score}</p>
         {isGameOver ? 
-            <h2>Game Over</h2> :
+            <div className="game-over">
+                <h2>Game Over</h2>
+                <p>You had already caught that pokemon in the last set.</p>
+                <p>You caught {score} pokemon! You're on your way to become a Pokemon Master.</p>
+                <p>Play again to cath 'em all</p>
+                <button onClick={resetGame}>Play again</button>
+            </div> :
             <div className="grid">
                 {shuffledIds.map(id => 
                     <Card key={id.id} id={id.id} onClick={handleCardClick} />     
