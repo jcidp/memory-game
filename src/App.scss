@@ -2,3 +2,7 @@ main {
     width: min(900px, 100% - 4rem);
     margin-inline: auto;
 }
+
+button:hover {
+    cursor: pointer;
+}
