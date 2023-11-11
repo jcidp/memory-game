@@ -1,17 +1,24 @@
 import "../styles/GameScreen.scss";
 import Card from "./Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Scores from "./Scores";
 
 function GameScreen() {
     const [cardNumber, setCardNumber] = useState(8);
     const [idList, setIdList] = useState([]);
     const [score, setScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
     const [isGameOver, setIsGameOver] = useState(false);
+
+    useEffect(() => {
+        const localHighScore = +localStorage.getItem("highScore");
+        if (localHighScore) setHighScore(localHighScore);
+    }, []);
 
     const createIdList = () => {
         const newIds = [];
         while (newIds.length < cardNumber) {
-            const randomId = Math.floor(Math.random() * 1017) + 1;
+            const randomId = Math.floor(Math.random() * 1008) + 1;
             if (!newIds.some(id => id.id === randomId)) {
                 newIds.push({
                     id: randomId,
@@ -33,7 +40,10 @@ function GameScreen() {
 
     const endGame = () => {
         setIsGameOver(true);
-        // TODO: Set High Score in Local Storage
+        if (score > highScore) {
+            setHighScore(score);
+            localStorage.setItem("highScore", score);
+        }
     };
 
     const handleCardClick = e => {
@@ -62,12 +72,12 @@ function GameScreen() {
     const shuffledIds = shuffleArray(idList);
 
     return (<main>
-        <p>{score}</p>
+        <Scores score={score} highScore={highScore} />
         {isGameOver ? 
             <div className="game-over">
                 <h2>Game Over</h2>
-                <p>You had already caught that pokemon in the last set.</p>
-                <p>You caught {score} pokemon! You're on your way to become a Pokemon Master.</p>
+                <p>You caught {score} pokemon!</p>
+                <p>You're on your way to become a Pokemon Master.</p>
                 <p>Play again to cath 'em all</p>
                 <button onClick={resetGame}>Play again</button>
             </div> :
