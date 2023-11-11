@@ -1,0 +1,26 @@
+.instructions {
+    position: absolute;
+    inset: 5rem;
+    background-color: white;
+    padding: 2rem;
+    border: 2px solid black;
+    border-radius: 20px;
+
+    &__heading {
+        text-align: center;
+    }
+
+    &__text {
+        margin: 1rem 0;
+    }
+
+    &__close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: transparent;
+        border: none;
+        padding: 1rem;
+        font-size: 2rem;
+    }
+}
