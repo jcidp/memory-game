@@ -76,11 +76,14 @@ function GameScreen() {
         <div className="wrapper">
         {isGameOver ? 
             <div className="game-over">
-                <h2>Game Over</h2>
-                <p>You caught {score} pokemon!</p>
-                <p>You're on your way to become a Pokemon Master.</p>
-                <p>Play again to cath 'em all</p>
-                <button onClick={resetGame}>Play again</button>
+                <h2 className="game-over__heading">Game Over</h2>
+                <div className="game-over__content">
+                    <p className="game-over__text">You caught <strong>{score} pokemon</strong>!</p>
+                    <p className="game-over__text">You're on your way to become a Pokemon Master</p>
+                    <p className="game-over__text">Play again to cath 'em all!</p>
+                    <button className="game-over__reset" onClick={resetGame}>Play again</button>
+                </div>
+                <img className="game-over__gif" src="https://media.giphy.com/media/dw3l0UwMQQI5QK9z8V/giphy.gif" alt="Raichu fainting" />
             </div> :
             <div className="grid">
                 {shuffledIds.map(id => 

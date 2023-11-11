@@ -2,7 +2,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
-    
+}
+
+.grid, .game-over {
     width: min(900px, 100% - 4rem);
     margin-inline: auto;
 }
@@ -16,4 +18,38 @@
 main {
     margin-top: 1rem;
     overflow-y: hidden;
+}
+
+.game-over {
+    text-align: center;
+
+    &__heading {
+        margin-bottom: 1rem;
+    }
+
+    &__content {
+        margin: 0 auto;
+        width: fit-content;
+        display: grid;
+    }
+
+    &__text {
+        margin: 0.5rem 0;
+    }
+
+    &__reset {
+        margin: 2rem auto;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        border: 1px solid steelblue;
+        font-weight: bold;
+        background-color: steelblue;
+        font-size: 1.25rem;
+        color: w;
+    }
+
+    &__gif {
+        margin-top: 2rem;
+        border-radius: 5px;
+    }
 }
