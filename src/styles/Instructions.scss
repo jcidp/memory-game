@@ -1,10 +1,12 @@
 .instructions {
     position: absolute;
-    inset: 5rem;
+    inset: 5rem 1rem;
     background-color: white;
     padding: 2rem;
     border: 2px solid black;
     border-radius: 20px;
+    max-width: 600px;
+    margin: 0 auto;
 
     &__heading {
         text-align: center;

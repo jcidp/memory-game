@@ -1,0 +1,20 @@
+.footer {
+    border-top: 1px solid black;
+    padding: 0.25rem;
+    
+    &__anchor {
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        &:hover {
+            color: black;
+        }
+    }
+
+    &__icon {
+        max-width: 1.5em;
+    }
+}

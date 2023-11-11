@@ -1,6 +1,19 @@
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
+    
+    width: min(900px, 100% - 4rem);
+    margin-inline: auto;
+}
+
+.wrapper {
     margin: 1rem 0;
+    max-height: calc(100% - 5rem);
+    overflow-y: auto;
+}
+
+main {
+    margin-top: 1rem;
+    overflow-y: hidden;
 }

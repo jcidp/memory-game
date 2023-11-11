@@ -1,7 +1,7 @@
-main {
-    width: min(900px, 100% - 4rem);
-    margin-inline: auto;
-    margin-top: 1rem;
+#root {
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    height: 100lvh;
 }
 
 button:hover {

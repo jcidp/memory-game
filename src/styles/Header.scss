@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 0.25em 0;
+    border-bottom: 1px solid black;
 
     &__title {
         grid-column: 2 / 3;
@@ -20,7 +21,7 @@
         text-decoration: underline;
 
         &:hover {
-            color: darkslategrey;
+            color: navy;
         }
     }
 }

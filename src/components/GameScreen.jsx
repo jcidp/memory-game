@@ -73,6 +73,7 @@ function GameScreen() {
 
     return (<main>
         <Scores score={score} highScore={highScore} />
+        <div className="wrapper">
         {isGameOver ? 
             <div className="game-over">
                 <h2>Game Over</h2>
@@ -87,6 +88,7 @@ function GameScreen() {
                 )}
             </div>
         }
+        </div>
     </main>)
 }
 
