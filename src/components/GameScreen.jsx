@@ -1,17 +1,18 @@
-import "../styles/Grid.scss";
+import "../styles/GameScreen.scss";
 import Card from "./Card";
 import { useEffect, useState } from "react";
 
-function Grid() {
+function GameScreen() {
     const [cardNumber, setCardNumber] = useState(8);
     const [idList, setIdList] = useState([]);
 
     const fillList = () => {
-        const newIds = [];
-        for (let i = 0; i < cardNumber - idList.length; i++) {
-            newIds.push(Math.floor(Math.random() * 980) + 1);
+        const newIds = [...idList];
+        while (newIds.length < cardNumber) {
+            const randomId = Math.floor(Math.random() * 1017) + 1;
+            if (!newIds.includes(randomId)) newIds.push(randomId);
         }
-        setIdList([...idList, ...newIds]);
+        setIdList(newIds);
     };
 
     const shuffleIds = () => {
@@ -27,15 +28,14 @@ function Grid() {
 
     const shuffledIds = shuffleIds();
 
-    console.log(shuffledIds);
-
-    return (
+    return (<main>
+        <p>Click on every Pokemon in the set once. Every time you do, we'll load a new set with more Pokemon. Let's see how many Pokemon you can click in a row without repeating within sets.</p>
         <div className="grid">
             {shuffledIds.map(id => 
                 <Card key={id} id={id} />     
             )}
         </div>
-    )
+    </main>)
 }
 
-export default Grid;
+export default GameScreen;

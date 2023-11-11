@@ -1,11 +1,11 @@
 import './App.scss';
-import Grid from './components/Grid';
+import GameScreen from './components/GameScreen';
 
 function App() {
   return (
     <>
       <h1>Hello, world!</h1>
-      <Grid />
+      <GameScreen />
     </>
   )
 }
