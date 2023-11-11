@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const imgUrlBase = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/";
 
-function Card({id}) {
+function Card({id, onClick}) {
     const [name, setName] = useState("");
 
     useEffect(() => {
@@ -21,8 +21,8 @@ function Card({id}) {
     }, [id])
 
     return (
-        <div className="card">
-            <img className="card__img" src={imgUrlBase + id + ".png"} alt={`Image of pokemon ${id}`} />
+        <div className="card" onClick={onClick} id={id}>
+            <img className="card__img" src={imgUrlBase + id + ".png"} alt={`Official artwork of ${name}`} />
             <p className="card__name">{name}</p>
         </div>
     );

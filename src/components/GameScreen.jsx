@@ -5,18 +5,25 @@ import { useState } from "react";
 function GameScreen() {
     const [cardNumber, setCardNumber] = useState(8);
     const [idList, setIdList] = useState([]);
+    const [score, setScore] = useState(0);
+    const [isGameOver, setIsGameOver] = useState(false);
 
-    const fillList = () => {
-        const newIds = [...idList];
+    const createIdList = () => {
+        const newIds = [];
         while (newIds.length < cardNumber) {
             const randomId = Math.floor(Math.random() * 1017) + 1;
-            if (!newIds.includes(randomId)) newIds.push(randomId);
+            if (!newIds.some(id => id.id === randomId)) {
+                newIds.push({
+                    id: randomId,
+                    clicked: false,
+                });
+            }
         }
         setIdList(newIds);
     };
 
-    const shuffleIds = () => {
-        const array = [...idList];
+    const shuffleArray = list => {
+        const array = [...list];
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -24,17 +31,39 @@ function GameScreen() {
         return array;
     }
 
-    if (cardNumber !== idList.length) fillList();
+    const endGame = () => {
+        setIsGameOver(true);
+        // TODO: Set High Score in Local Storage
+    }
 
-    const shuffledIds = shuffleIds();
+    const handleCardClick = e => {
+        const clickedId = +e.target.closest(".card").id;
+        if (idList.some(pkmId => pkmId.id === clickedId && pkmId.clicked)) return endGame();
+        setScore(score + 1);
+        if (idList.filter(pkmId => pkmId.clicked).length + 1 === cardNumber) {
+            setCardNumber(cardNumber + 4);
+            return;
+        }
+        setIdList(idList.map(pkmId => {
+            if (pkmId.id === clickedId) return {...pkmId, clicked: true};
+            return pkmId;
+        }));
+    }
+
+    if (cardNumber !== idList.length) createIdList();
+
+    const shuffledIds = shuffleArray(idList);
 
     return (<main>
-        <p>Click on every Pokemon in the set once. Every time you do, we'll load a new set with more Pokemon. Let's see how many Pokemon you can click in a row without repeating within sets.</p>
-        <div className="grid">
-            {shuffledIds.map(id => 
-                <Card key={id} id={id} />     
-            )}
-        </div>
+        <p>{score}</p>
+        {isGameOver ? 
+            <h2>Game Over</h2> :
+            <div className="grid">
+                {shuffledIds.map(id => 
+                    <Card key={id.id} id={id.id} onClick={handleCardClick} />     
+                )}
+            </div>
+        }
     </main>)
 }
 
