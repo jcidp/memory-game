@@ -1,12 +1,30 @@
-.instructions {
+.backdrop {
+    background-color: rgba($color: grey, $alpha: 0.6);
     position: absolute;
-    inset: 5rem 1rem;
+    inset: 0;
+
+    &.hidden {
+        display: none;
+    }
+}
+
+.instructions {
+    position: fixed;
+    top: 50%;
+    left: 50%;
     background-color: white;
-    padding: 2rem;
+    padding: 1rem 2rem;
     border: 2px solid black;
     border-radius: 20px;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: 70ch;
+    transform: translate(-50%, -70%);
+    transition-property: transform opacity;
+    transition: 0.3s ease-in-out;
+
+    &.hidden {
+        transform: translate(-50%, -120%);
+        opacity: 0%;
+    }
 
     &__heading {
         text-align: center;

@@ -10,18 +10,28 @@
         text-align: center;
     }
 
-    &__instructions-container {
+    &__btn-container {
         display: grid;
         place-content: center;
     }
 
-    &__instructions {
+    &__btn {
         background-color: transparent;
         border: none;
-        text-decoration: underline;
 
         &:hover {
             color: navy;
         }
+
+        &:hover + .header__underline {
+            transform: scaleX(1);
+        }
+    }
+
+    &__underline {
+        border-top: 1px solid navy;
+        transform: scaleX(0);
+        transform-origin: 0;
+        transition: transform 0.5s ease-in-out;
     }
 }
