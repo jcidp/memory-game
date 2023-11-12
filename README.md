@@ -6,7 +6,7 @@ A memory card game built on React using the [Poke API](https://pokeapi.co/) to f
 
 ![Screenshot of the game showing some Pokemon cards.](src/assets/poke-memory-screenshot.png)
 
-Play the game: https://memory-game-seven-henna.vercel.app/
+Play the game: https://pokemon-memory-game-jcidp.vercel.app/
 
 ## How to play
 - Click on the cards on the screen without repeating within a round.
