@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Scores from "./Scores";
 
 function GameScreen() {
-    const [cardNumber, setCardNumber] = useState(12);
+    const [cardNumber, setCardNumber] = useState(8);
     const [idList, setIdList] = useState([]);
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);

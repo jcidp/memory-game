@@ -26,6 +26,7 @@
         background-color: transparent;
         color: white;
         border: none;
+        font-size: 1.125rem;
 
         &:hover {
             color: lightgrey;
@@ -47,7 +48,7 @@
 @media (max-width: 650px) {
     .header {
         .wrapper {
-            width: min(900px, 100% - 2rem);
+            width: min(800px, 100% - 1rem);
         }
 
         &__title {
