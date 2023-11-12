@@ -75,18 +75,12 @@ main {
         margin: 2rem auto;
         padding: 0.5rem 1rem;
         border-radius: 5px;
-        border: none;
+        border: 1px solid #3B4CCA;
         font-weight: bold;
         background-color: #3B4CCA;
         color: white;
         font-size: 1.25rem;
         color: w;
-        transition-property: box-shadow;
-        transition: 0.3s ease-out;
-
-        &:hover {
-            box-shadow: 2px 2px 5px 2px #B3A125;
-        }
     }
 
     &__gif {
