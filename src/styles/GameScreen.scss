@@ -9,15 +9,15 @@
     margin-inline: auto;
 }
 
-.wrapper {
-    margin: 1rem 0;
-    max-height: calc(100% - 5rem);
-    overflow-y: auto;
-}
-
 main {
     margin-top: 1rem;
     overflow-y: hidden;
+
+    .wrapper {
+        margin: 1rem 0;
+        max-height: calc(100% - 5rem);
+        overflow-y: auto;
+    }
 }
 
 .game-over {

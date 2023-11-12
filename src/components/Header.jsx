@@ -10,12 +10,14 @@ function Header() {
     };
 
     return <header className="header">
-        <h1 className="header__title">Poke Memory</h1>
-        <div className="header__btn-container">
-            <button className="header__btn" onClick={toggleInstructions} data-clickable>How to play</button>
-            <div className="header__underline"></div>
+        <div className="wrapper">
+            <h1 className="header__title">Poke Memory</h1>
+            <div className="header__btn-container">
+                <button className="header__btn" onClick={toggleInstructions} data-clickable>How to play</button>
+                <div className="header__underline"></div>
+            </div>
+            <Instructions isVisible={showInstructions} onClick={toggleInstructions} />
         </div>
-        <Instructions isVisible={showInstructions} onClick={toggleInstructions} />
     </header>
 }
 
