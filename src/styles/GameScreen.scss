@@ -3,11 +3,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 1rem;
+    width: min(800px, 100% - 4rem);
+    margin-inline: auto;
 }
 
 .grid, .game-over {
-    width: min(800px, 100% - 4rem);
-    margin-inline: auto;
     animation: fade-in 0.5s ease-in-out alternate forwards;
 
     &.fading {
@@ -52,7 +52,7 @@ main {
     padding: 1rem;
     text-align: center;
     background: white;
-    width: fit-content;
+    width: min(600px, calc(100% - 4rem));
     border: 1px solid #3B4CCA;
     border-radius: 10px;
 

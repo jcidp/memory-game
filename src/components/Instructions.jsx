@@ -1,9 +1,18 @@
 import "../styles/Instructions.scss";
 
-function Instructions({isVisible, onClick}) {
+function Instructions({onClick}) {
+    if (!localStorage.getItem("highScore")) {
+        setTimeout(() => {
+            const backdrop = document.querySelector(".backdrop");
+            const instructions = document.querySelector(".instructions");
+            backdrop.classList.remove("hidden");
+            instructions.classList.remove("hidden");
+        }, 0)
+    }
+
     return <>
-        <div className={`backdrop ${isVisible && "hidden"}`} onClick={onClick} data-clickable></div>
-        <div className={`instructions ${isVisible && "hidden"}`} >
+        <div className="backdrop hidden" onClick={onClick} data-clickable></div>
+        <div className="instructions hidden" >
             <h2 className="instructions__heading">Instructions</h2>
             <p className="instructions__text">Each round, we'll load a set of cards with Pokemon in them.</p>
             <p className="instructions__text">Your mission: <strong>click on all the Pokemon in the set to catch them, but without repeating Pokemon!</strong></p>

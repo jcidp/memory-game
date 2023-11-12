@@ -3,10 +3,15 @@ import "../styles/Header.scss";
 import Instructions from "./Instructions";
 
 function Header() {
-    const [showInstructions, setShowInstructions] = useState(false);
+    const toggleVisibility = () => {
+        const backdrop = document.querySelector(".backdrop");
+        const instructions = document.querySelector(".instructions");
+        backdrop.classList.toggle("hidden");
+        instructions.classList.toggle("hidden");
+    }
 
     const toggleInstructions = (e) => {
-        if (e.target.dataset.clickable) setShowInstructions(!showInstructions);
+        if (e.target.dataset.clickable) toggleVisibility();
     };
 
     return <header className="header">
@@ -16,7 +21,7 @@ function Header() {
                 <button className="header__btn" onClick={toggleInstructions} data-clickable>How to play</button>
                 <div className="header__underline"></div>
             </div>
-            <Instructions isVisible={showInstructions} onClick={toggleInstructions} />
+            <Instructions onClick={toggleInstructions} />
         </div>
     </header>
 }
