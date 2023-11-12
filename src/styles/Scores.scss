@@ -1,4 +1,11 @@
+.controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+}
+
 .scores {
+    grid-column: 2 / 3;
     background-color: white;
     max-width: fit-content;
     margin: 0 auto;
@@ -6,4 +13,36 @@
     border: 1px solid #B3A125;
     border-radius: 10px;
     padding: 0.5rem 1rem;
+}
+
+.mute-container {
+    display: grid;
+    place-content: center;
+}
+
+.mute {
+    background-color: rgba($color: white, $alpha: 0.9);
+    border: none;
+    border-radius: 50%;
+
+    &__icon {
+        width: 2rem;
+
+        &:hover {
+            fill: #B3A125;
+        }
+    }
+}
+
+@media (max-width: 460px) {
+    .controls {
+        display: block;
+    }
+
+    .mute-container {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translate(-50%, -50%);
+    }
 }

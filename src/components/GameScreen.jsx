@@ -9,10 +9,15 @@ function GameScreen() {
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [isGameOver, setIsGameOver] = useState(false);
+    const [isMuted, setIsMuted] = useState(false);
 
     useEffect(() => {
         const localHighScore = +localStorage.getItem("highScore");
         if (localHighScore) setHighScore(localHighScore);
+    }, []);
+
+    useEffect(() => {
+        setIsMuted(localStorage.getItem("isMuted") === "true");
     }, []);
 
     const createIdList = () => {
@@ -61,6 +66,7 @@ function GameScreen() {
         const clickedId = +e.target.closest(".card").id;
         if (idList.some(pkmId => pkmId.id === clickedId && pkmId.clicked)) return endGame();
         hideCards();
+        startNewMusic("audio", 72, 41);
 
         setTimeout(() => {
             setScore(score + 1);
@@ -68,10 +74,10 @@ function GameScreen() {
                 setCardNumber(cardNumber + 4);
                 return;
             }
-            setIdList(idList.map(pkmId => {
+            setIdList(shuffleArray(idList.map(pkmId => {
                 if (pkmId.id === clickedId) return {...pkmId, clicked: true};
                 return pkmId;
-            }));
+            })));
         }, 500);
     };
 
@@ -84,14 +90,42 @@ function GameScreen() {
             setScore(0)
             setIsGameOver(false);
         });
+        startNewMusic("audio", 72, 41, "victory");
     };
+
+    const startNewMusic = (playId, cutoffTime, restartTime, pauseId) => {
+        pauseId && document.getElementById(pauseId).pause();
+        const music = document.getElementById(playId);
+        if (music.duration == 0 || music.paused) {
+            if (isMuted) music.muted = true;
+            music.volume = 0.4;
+            music.currentTime = 0;
+            music.play();
+            music.addEventListener("timeupdate", (e) => {
+                if (e.target.currentTime > cutoffTime) music.currentTime = restartTime;
+            });
+        }
+    }
+
+    const toggleMuteMusic = () => {
+        const audios = document.querySelectorAll("audio");
+        audios.forEach(audio => {
+            audio.muted = !isMuted;
+        });
+        setIsMuted(!isMuted);
+        localStorage.setItem("isMuted", isMuted ? "false" : "true");
+    }
 
     if (cardNumber !== idList.length) createIdList();
 
-    const shuffledIds = shuffleArray(idList);
+    if (isGameOver) {
+        setTimeout(() => {
+            startNewMusic("victory", 24, 12.9, "audio");
+        }, 0);
+    }
 
     return (<main>
-        <Scores score={score} highScore={highScore} />
+        <Scores score={score} highScore={highScore} isMuted={isMuted} toggleMuteMusic={toggleMuteMusic} />
         <div className="wrapper">
         {isGameOver ? 
             <div key={"game-over"} className="game-over">
@@ -103,9 +137,10 @@ function GameScreen() {
                     <button className="game-over__reset" onClick={resetGame}>Play again</button>
                 </div>
                 <img className="game-over__gif" src="https://media.giphy.com/media/dw3l0UwMQQI5QK9z8V/giphy.gif" alt="Raichu fainting" />
+                <audio id="victory" preload='auto' src="src/assets/pokemon-victory.mp3"></audio>
             </div> :
             <div key={"grid"} className="grid">
-                {shuffledIds.map(id => 
+                {idList.map(id => 
                     <Card key={id.id} id={id.id} onClick={handleCardClick}/>     
                 )}
             </div>
