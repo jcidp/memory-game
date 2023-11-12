@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Scores from "./Scores";
 
 function GameScreen() {
-    const [cardNumber, setCardNumber] = useState(8);
+    const [cardNumber, setCardNumber] = useState(12);
     const [idList, setIdList] = useState([]);
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
@@ -39,32 +39,51 @@ function GameScreen() {
     };
 
     const endGame = () => {
-        setIsGameOver(true);
-        if (score > highScore) {
-            setHighScore(score);
-            localStorage.setItem("highScore", score);
-        }
+        const grid = document.querySelector(".grid");
+        grid.classList.add("fading");
+        grid.addEventListener("animationend", () => {
+            setIsGameOver(true);
+            if (score > highScore) {
+                setHighScore(score);
+                localStorage.setItem("highScore", score);
+            }
+        });
     };
+
+    const hideCards = () => {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach(card => {
+            card.classList.add("hidden");
+        });
+    }
 
     const handleCardClick = e => {
         const clickedId = +e.target.closest(".card").id;
         if (idList.some(pkmId => pkmId.id === clickedId && pkmId.clicked)) return endGame();
-        setScore(score + 1);
-        if (idList.filter(pkmId => pkmId.clicked).length + 1 === cardNumber) {
-            setCardNumber(cardNumber + 4);
-            return;
-        }
-        setIdList(idList.map(pkmId => {
-            if (pkmId.id === clickedId) return {...pkmId, clicked: true};
-            return pkmId;
-        }));
+        hideCards();
+
+        setTimeout(() => {
+            setScore(score + 1);
+            if (idList.filter(pkmId => pkmId.clicked).length + 1 === cardNumber) {
+                setCardNumber(cardNumber + 4);
+                return;
+            }
+            setIdList(idList.map(pkmId => {
+                if (pkmId.id === clickedId) return {...pkmId, clicked: true};
+                return pkmId;
+            }));
+        }, 500);
     };
 
     const resetGame = () => {
-        setCardNumber(8);
-        setIdList([]);
-        setScore(0)
-        setIsGameOver(false);
+        const endScreen = document.querySelector(".game-over");
+        endScreen.classList.add("fading");
+        endScreen.addEventListener("animationend", () => {
+            setCardNumber(8);
+            setIdList([]);
+            setScore(0)
+            setIsGameOver(false);
+        });
     };
 
     if (cardNumber !== idList.length) createIdList();
@@ -75,7 +94,7 @@ function GameScreen() {
         <Scores score={score} highScore={highScore} />
         <div className="wrapper">
         {isGameOver ? 
-            <div className="game-over">
+            <div key={"game-over"} className="game-over">
                 <h2 className="game-over__heading">Game Over</h2>
                 <div className="game-over__content">
                     <p className="game-over__text">You caught <strong>{score} pokemon</strong>!</p>
@@ -85,9 +104,9 @@ function GameScreen() {
                 </div>
                 <img className="game-over__gif" src="https://media.giphy.com/media/dw3l0UwMQQI5QK9z8V/giphy.gif" alt="Raichu fainting" />
             </div> :
-            <div className="grid">
+            <div key={"grid"} className="grid">
                 {shuffledIds.map(id => 
-                    <Card key={id.id} id={id.id} onClick={handleCardClick} />     
+                    <Card key={id.id} id={id.id} onClick={handleCardClick}/>     
                 )}
             </div>
         }

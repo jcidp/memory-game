@@ -1,5 +1,6 @@
 .header {
-    background-color: steelblue;
+    background-color: #CC0000;
+    color: white;
     padding: 0.25em 0;
     border-bottom: 1px solid black;
     
@@ -23,10 +24,11 @@
 
     &__btn {
         background-color: transparent;
+        color: white;
         border: none;
 
         &:hover {
-            color: navy;
+            color: lightgrey;
         }
 
         &:hover + .header__underline {
@@ -35,7 +37,7 @@
     }
 
     &__underline {
-        border-top: 1px solid navy;
+        border-top: 1px solid lightgrey;
         transform: scaleX(0);
         transform-origin: 0;
         transition: transform 0.5s ease-in-out;
@@ -44,6 +46,10 @@
 
 @media (max-width: 650px) {
     .header {
+        .wrapper {
+            width: min(900px, 100% - 2rem);
+        }
+
         &__title {
             grid-column: 1 / 3;
         }

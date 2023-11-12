@@ -20,10 +20,23 @@ function Card({id, onClick}) {
         fetchPokemonFromId();
     }, [id])
 
+    useEffect(() => {
+        const hideCards = () => {
+            const cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                card.classList.remove("hidden");
+            });
+        }
+
+        setTimeout(hideCards, 500);
+    })
+
     return (
-        <div className="card" onClick={onClick} id={id}>
+        <div className="card hidden" onClick={onClick} id={id}>
+            <img className="card__img--back" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Pok%C3%A9_Ball_icon.svg" alt="A card with the image of a Pokeball." />
             <img className="card__img" src={imgUrlBase + id + ".png"} alt={`Official artwork of ${name}`} />
             <p className="card__name">{name}</p>
+
         </div>
     );
 

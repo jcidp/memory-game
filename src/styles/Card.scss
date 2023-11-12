@@ -3,20 +3,61 @@ img {
 }
 
 .card {
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid grey;
+    border: 2px solid #3B4CCA;
     border-radius: 5px;
+    position: relative;
+    transform: perspective(500px) rotateY(0);
+    transition: transform 0.5s ease-in-out;
 
+    &.hidden {
+        transform: rotateY(180deg);
+
+        .card__img {
+            opacity: 0;
+
+            &--back {
+                opacity: 1;
+            }
+        }
+
+        .card__name {
+            opacity: 0;
+        }
+    }
+    
     &:hover {
         cursor: pointer;
+        border-color: #B3A125;
+        box-shadow: 2px 2px 5px 2px #B3A125;
+    }
+
+    &__img {
+        opacity: 1;
+        transition: opacity 0.01s linear 0.24s;
+
+        &--back {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.01s linear 0.24s;
+        }
     }
     
     &__name {
+        background-color: #3B4CCA;
+        color: white;
         width: 100%;
         text-align: center;
-        border-top: 1px solid grey;
+        border-top: 1px solid #B3A125;
         padding: 0.5rem 0;
+        border-radius: 0 0 5px 5px;
+        opacity: 1;
+        transition: opacity 0.01s linear 0.24s;
     }
 }

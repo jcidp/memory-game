@@ -8,12 +8,28 @@
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
+        text-decoration: none;
+        position: relative;
 
         &:hover {
             color: black;
         }
+
+        &:hover > .footer__underline {
+            transform: scaleX(1);
+        }
     }
 
+    &__underline {
+        position: absolute;
+        bottom: -1px;
+        width: 10rem;
+        border-top: 1px solid black;
+        transform: scaleX(0);
+        transform-origin: 0;
+        transition: transform 0.5s ease-in-out;
+    }
+    
     &__icon {
         max-width: 1.5em;
     }
